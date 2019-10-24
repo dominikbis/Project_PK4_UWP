@@ -1,0 +1,71 @@
+﻿<Application
+    x:Class="Projekt_PK4.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Projekt_PK4">
+
+
+    <Application.Resources>
+        <Thickness x:Key="DefaultMargin">20</Thickness>
+        <Thickness x:Key="DefaultMarginMainMenu">10</Thickness>
+        <Thickness x:Key="DefaultMarginMedicineName">20,20,20,5</Thickness>
+        <Thickness x:Key="DefaultMarginMedicineValue">50,0,20,20</Thickness>
+        <Thickness x:Key="DefaultMarginInlineMedicineValue">0,20,20,5</Thickness>
+
+
+        <Style x:Name="MainMenuTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="FontWeight" Value="Thin"/>
+            <Setter Property="FontFamily" Value="BankGothic Lt BT"/>
+        </Style>
+        
+        
+
+        <Style x:Name="MedicineNameTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginMedicineName}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+        </Style>
+
+        <Style x:Name="MedicineValueTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MedicineNameTextBlockStyle}">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginMedicineValue}"/>
+            <Setter Property="FontWeight" Value="Thin"/>
+        </Style>
+
+        <Style x:Name="MedicineValueInlineTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MedicineValueTextBlockStyle}">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginInlineMedicineValue}"/>
+        </Style>
+
+        <Style x:Name="MedicineLongValueTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource MedicineValueTextBlockStyle}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Name="MedicineEditTextBoxStyle" TargetType="TextBox">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginMedicineValue}"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="Thin"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+        </Style>
+
+        <Style x:Name="MedicineEditInlineTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MedicineEditTextBoxStyle}">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginInlineMedicineValue}"/>
+        </Style>
+
+        <Style x:Name="MedicineLongEditTextBoxStyle" TargetType="TextBox" BasedOn="{StaticResource MedicineEditTextBoxStyle}">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        
+
+        <DataTemplate x:Key="DataTemplateListMedicineName">
+            <!--moze juz to gdzies jest i tutaj sie niepotrzebnie powtarza, pomysl nad zmiana nazwy-->
+            <Grid>
+                <TextBlock Text="{Binding Name}"/>
+            </Grid>
+        </DataTemplate>
+
+    </Application.Resources>
+
+</Application>

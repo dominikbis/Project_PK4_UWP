@@ -1,0 +1,110 @@
+﻿<Page
+    x:Class="Projekt_PK4.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Projekt_PK4"
+    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+
+        <Style TargetType="StackPanel">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginMainMenu}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="Pivot">
+            <Setter Property="Margin" Value="{StaticResource DefaultMarginMainMenu}"/>
+        </Style>
+
+        <Style TargetType="Grid">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="20"/>
+                    <Setter Property="FontSize" Value="40"/>
+                    <Setter Property="FontWeight" Value="Thin"/>
+                    <Setter Property="FontFamily" Value="BankGothic Lt BT"/>
+                    <Setter Property="Width" Value="300"/>
+                </Style>
+                
+                <Style TargetType="TextBlock" BasedOn="{StaticResource MainMenuTextBlockStyle}">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </StackPanel.Resources>
+            
+            <TextBlock Text="Menu"/>
+            <Button Name="ButtonMenuNewBase" Click="ButtonMenuNewBase_Click" Content="Nowa baza"/>
+            <Button Name="ButtonMenuLoadBase" Click="ButtonMenuLoadBase_Click" Content="Wczytaj"/>
+            <Button Name="ButtonMenuExit" Click="ButtonMenuExit_Click" Content="Wyjdz"/>
+        </StackPanel>
+
+        <Pivot x:Name="PivotMenuOption" Grid.Column="1">
+            <Pivot.Resources>
+                <Style TargetType="TextBlock" BasedOn="{StaticResource MainMenuTextBlockStyle}">
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                </Style>
+
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="20"/>
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property="Width" Value="400"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                </Style>
+            </Pivot.Resources>
+            
+            <PivotItem x:Name="PivotItemHiddenMenu"/>
+            <PivotItem x:Name="PivotItemNewBase">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Text="Podaj nazwe bazy"/>
+                    <TextBox x:Name="TextBoxNewBaseName" Grid.Row="1"
+                             extensions:TextBoxRegex.Regex="^[^ ].*$"
+                             extensions:TextBoxRegex.ValidationMode="Dynamic"/>
+                    <TextBlock Text="Podaj lokalizacje pliku" Grid.Row="2"/>
+                    <TextBox x:Name="TextBoxNewBaseAccessPath" Grid.Row="3"/>
+                    <AppBarButton x:Name="AppBarButtonCreateBase" Click="AppBarButtonCreateBase_Click" Icon="Accept" Grid.Row="4" HorizontalAlignment="Right" Background="#FFD8D4D4" />
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="PivotItemLoadBase">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Podaj nazwe bazy"/>
+                    <TextBox x:Name="TextBoxLoadBaseAccessPath" Grid.Row="1"/>
+                    <AppBarButton x:Name="AppBarButtonLoadBase" Click="AppBarButtonLoadBase_Click"  Icon="Accept" Grid.Row="2" HorizontalAlignment="Right" Background="#FFD8D4D4" />
+                    <StackPanel x:Name="StackPanelLoadBaseProgress" Visibility="{Binding ElementName=AppBarButtonLoadBase, Path=IsPressed}"
+                                Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="0">
+                        <ProgressRing x:Name="ProgressRingLoadBase" IsActive="{Binding ElementName=AppBarButtonLoadBase, Path=IsPressed}" Height="50" Width="50"/>
+                        <TextBlock Text="Wczytywanie..." FontSize="30" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
